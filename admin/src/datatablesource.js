@@ -1,11 +1,12 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
+
 export const userColumns = [
   { field: "_id", headerName: "ID", width: 70 },
   {
     field: "user",
     headerName: "User",
-    width: 230,
+    width: 140,
     renderCell: (params) => {
       return (
         <div className="cellWithImg">
@@ -34,8 +35,15 @@ export const userColumns = [
   {
     field: "phone",
     headerName: "Phone",
-    width: 100,
+    width: 140,
   },
+  {
+    field: "role",
+    headerName: "Départment",
+    width: 160,
+  },
+ 
+
 ];
 
 export const hotelColumns = [
@@ -60,12 +68,23 @@ export const hotelColumns = [
     headerName: "City",
     width: 100,
   },
+  {
+    field: "rooms",
+    headerName: "rooms",
+    width: 100,
+  },
+  {
+    field: "featured",
+    headerName: "featured",
+    width: 100,
+  },
+ 
 ];
 
 export const roomColumns = [
   { field: "_id", headerName: "ID", width: 70 },
   {
-    field: "title",
+    field: "titleroom",
     headerName: "Title",
     width: 230,
   },
@@ -84,4 +103,40 @@ export const roomColumns = [
     headerName: "Max People",
     width: 100,
   },
+  {
+    field: hotelColumns.name,
+    headerName: "hotel",
+    width: 100,
+  },
+];
+
+export const reclamationColumns = [
+  { field: "_id", headerName: "ID", width: 70 },
+  {
+    
+    field: "name",
+    headerName: "username",
+    width: 232,
+  },
+  {
+    
+    field: "title",
+    headerName: "Title",
+    width: 200,
+  },
+  
+  {
+    
+    field: "createdAt",
+    headerName: "createdAt",
+    width: 230,
+  },
+
+  {
+    
+    field: "message",
+    headerName: "reclamation",
+    width: 230,
+  },
+
 ];

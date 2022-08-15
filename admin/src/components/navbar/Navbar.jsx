@@ -1,4 +1,4 @@
-import "./navbar.scss";
+import  "./navbar.scss";
 import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 import LanguageOutlinedIcon from "@mui/icons-material/LanguageOutlined";
 import DarkModeOutlinedIcon from "@mui/icons-material/DarkModeOutlined";
@@ -8,12 +8,23 @@ import ChatBubbleOutlineOutlinedIcon from "@mui/icons-material/ChatBubbleOutline
 import ListOutlinedIcon from "@mui/icons-material/ListOutlined";
 import { DarkModeContext } from "../../context/darkModeContext";
 import { useContext } from "react";
-import React from 'react'
+import React, { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom'
+import useStyles from './styles';
+import { AppBar, Typography, Toolbar, Avatar, Button } from '@material-ui/core';
+import { Link,useNavigate,useLocation } from 'react-router-dom';
+import decode from 'jwt-decode';
+import { AuthContext } from "../../context/AuthContext";
+
 
 const Navbar = () => {
-  const { dispatch } = useContext(DarkModeContext);
-
+  const { loading, error, dispatch } = useContext(AuthContext);
+  const classes = useStyles();
+  const location = useLocation();
+  const { user } = useContext(AuthContext);
+  const navigate = useNavigate();
+  
+  
   return (
     <div className="navbar">
       <div className="wrapper">
@@ -46,13 +57,7 @@ const Navbar = () => {
           <div className="item">
             <ListOutlinedIcon className="icon" />
           </div>
-          <div className="item">
-            <img
-              src="https://images.pexels.com/photos/941693/pexels-photo-941693.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"
-              alt=""
-              className="avatar"
-            />
-          </div>
+
         </div>
       </div>
     </div>

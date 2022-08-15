@@ -117,7 +117,7 @@ const NewHotel = () => {
                     : data &&
                       data.map((room) => (
                         <option key={room._id} value={room._id}>
-                          {room.title}
+                          {room.titleroom}
                         </option>
                       ))}
                 </select>

@@ -10,6 +10,29 @@ import ReactDOM from 'react-dom'
 const New = ({ inputs, title }) => {
   const [file, setFile] = useState("");
   const [info, setInfo] = useState({});
+  const [role, setrole] = useState([]);
+  const options = [
+    {
+      label: "Informatique",
+      value: "Informatique",
+    },
+    {
+      label: "Télecommunication",
+      value: "Télecommunication",
+    },
+  {
+    label: "Technique",
+    value: "Technique",
+  }
+  ];
+ 
+  const handleSelect = (e) => {
+    const value = Array.from(
+      e.target.selectedOptions,
+      (option) => option.value
+    );
+    setrole(value);
+  };
 
   const handleChange = (e) => {
     setInfo((prev) => ({ ...prev, [e.target.id]: e.target.value }));
@@ -33,7 +56,7 @@ const New = ({ inputs, title }) => {
         img: url,
       };
 
-      await axios.post("/auth/register", newUser);
+      await axios.post("/auth/register", newUser) ;
     } catch (err) {
       console.log(err);
     }
@@ -84,8 +107,29 @@ const New = ({ inputs, title }) => {
                   />
                 </div>
               ))}
+              <div className="formInput">
+                <label>Départment</label>
+                <div>
+                <select id="role" onChange={handleChange}>
+                  <option value={options.Informatique}>Informatique</option>
+                  <option value={options.Télecommunication}>Télecommunication</option>
+                  <option value={options.Technique}>Technique</option>
+                </select>
+              </div>
+              <br></br>
+              <div className="formInput">
+                <label>Accés Admin</label>
+                <select id="isAdmin" onChange={handleChange}>
+                  <option value={false}>Non</option>
+                  <option value={true}>Oui</option>
+                </select>
+              </div>
+              </div>
+              
+            
               <button onClick={handleClick}>Send</button>
             </form>
+            
           </div>
         </div>
       </div>

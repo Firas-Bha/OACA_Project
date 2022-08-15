@@ -4,14 +4,17 @@ import List from "./pages/list/List";
 import Single from "./pages/single/Single";
 import New from "./pages/new/New";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-import { productInputs, userInputs } from "./formSource";
+import { productInputs, userInputs,reclamationInputs } from "./formSource";
 import "./style/dark.scss";
 import { useContext } from "react";
 import { DarkModeContext } from "./context/darkModeContext";
 import { AuthContext } from "./context/AuthContext";
-import { hotelColumns, roomColumns, userColumns } from "./datatablesource";
+import { hotelColumns, roomColumns, userColumns,reclamationColumns} from "./datatablesource";
 import NewHotel from "./pages/newHotel/NewHotel";
 import NewRoom from "./pages/newRoom/NewRoom";
+import NewPost from "./pages/newReclamation/newReclamation";
+import EditRec from "./pages/editRec/EditRec.jsx";
+//import ModifierRec from "./pages/modifierRec/modifierRec";
 
 function App() {
   const { darkMode } = useContext(DarkModeContext);
@@ -119,6 +122,42 @@ function App() {
               />
             </Route>
           </Route>
+          <Route path="posts">
+              <Route
+                index
+                element={
+                  <ProtectedRoute>
+                    <List columns={reclamationColumns} />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path=":productId"
+                element={
+                  <ProtectedRoute>
+                    <Single />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="new"
+                element={
+                  <ProtectedRoute>
+                    <NewPost  />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="EditRec"
+                element={
+                  <ProtectedRoute>
+                    <EditRec  />
+                  </ProtectedRoute>
+                }
+              />
+            </Route>
+           
+            
         </Routes>
       </BrowserRouter>
     </div>

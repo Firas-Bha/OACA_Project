@@ -4,6 +4,7 @@ import PersonOutlineIcon from "@mui/icons-material/PersonOutline";
 import LocalShippingIcon from "@mui/icons-material/LocalShipping";
 import CreditCardIcon from "@mui/icons-material/CreditCard";
 import StoreIcon from "@mui/icons-material/Store";
+import { AppBar, Typography, Toolbar, Avatar, Button } from '@material-ui/core';
 import InsertChartIcon from "@mui/icons-material/InsertChart";
 import SettingsApplicationsIcon from "@mui/icons-material/SettingsApplications";
 import ExitToAppIcon from "@mui/icons-material/ExitToApp";
@@ -11,19 +12,49 @@ import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
 import SettingsSystemDaydreamOutlinedIcon from "@mui/icons-material/SettingsSystemDaydreamOutlined";
 import PsychologyOutlinedIcon from "@mui/icons-material/PsychologyOutlined";
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
+import LogoutIcon from '@mui/icons-material/Logout';
 import { Link } from "react-router-dom";
 import { DarkModeContext } from "../../context/darkModeContext";
 import { useContext } from "react";
-import React from 'react'
+import React, { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom'
+import { useLocation, useNavigate } from 'react-router-dom';
+import decode from 'jwt-decode';
+import { AuthContext } from "../../context/AuthContext";
+
+
+
+
+
 
 const Sidebar = () => {
-  const { dispatch } = useContext(DarkModeContext);
+  const { loading, error, dispatch } = useContext(AuthContext);
+  const navigate = useNavigate();
+  const location = useLocation();
+  const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')));
+  const logout = () => {
+    
+    dispatch({ type: 'LOGOUT' });
+
+    navigate('/login');
+
+    setUser(null);
+  };
+  useEffect(() => {
+    const token = user?.token;
+    if (token) {
+      const decodedToken = decode(token);
+
+      if (decodedToken.exp * 1000 < new Date().getTime()) logout();
+    }
+
+    setUser(JSON.parse(localStorage.getItem('profile')));
+  }, [location]);
   return (
     <div className="sidebar">
       <div className="top">
         <Link to="/" style={{ textDecoration: "none" }}>
-          <span className="logo">lamadmin</span>
+          <span className="logo">OACA ADMIN</span>
         </Link>
       </div>
       <hr />
@@ -53,6 +84,13 @@ const Sidebar = () => {
               <span>Rooms</span>
             </li>
           </Link>
+          <Link to="/posts" style={{ textDecoration: "none" }}>
+            <li>
+              <CreditCardIcon className="icon" />
+              <span>Reclamation</span>
+            </li>
+          </Link>
+          
           <li>
             <LocalShippingIcon className="icon" />
             <span>Delivery</span>
@@ -84,21 +122,13 @@ const Sidebar = () => {
             <AccountCircleOutlinedIcon className="icon" />
             <span>Profile</span>
           </li>
-          <li>
-            <ExitToAppIcon className="icon" />
+
+          <li>        
+            <LogoutIcon variant="contained"className="icon" color="secondary" onClick={logout} >Logout</LogoutIcon>
             <span>Logout</span>
+
           </li>
         </ul>
-      </div>
-      <div className="bottom">
-        <div
-          className="colorOption"
-          onClick={() => dispatch({ type: "LIGHT" })}
-        ></div>
-        <div
-          className="colorOption"
-          onClick={() => dispatch({ type: "DARK" })}
-        ></div>
       </div>
     </div>
   );

@@ -6,7 +6,7 @@ import { CircularProgressbar } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpOutlinedIcon from "@mui/icons-material/KeyboardArrowUpOutlined";
-
+import useFetch from "../../hooks/useFetch";
 const Featured = () => {
   return (
     <div className="featured">
@@ -48,6 +48,21 @@ const Featured = () => {
         </div>
       </div>
     </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   );
 };
 

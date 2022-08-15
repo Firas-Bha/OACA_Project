@@ -5,12 +5,19 @@ import { Link, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 import useFetch from "../../hooks/useFetch";
 import axios from "axios";
+import { Modal, Button, OverlayTrigger, Tooltip } from 'react-bootstrap';
+import EditRec from "../../pages/editRec/EditRec";
+//import modifierRec from "../../pages/modifierRec/modifierRec";
 
-const Datatable = ({columns}) => {
+const Datatable = ({columns,post}) => {
   const location = useLocation();
   const path = location.pathname.split("/")[1];
+  const [selectedPost, setSelectedPost] = useState([]);
   const [list, setList] = useState('');
+  const [show, setShow] = useState(false);
   const { data, loading, error } = useFetch(`/${path}`);
+  
+  
 
   useEffect(() => {
     setList(data);
@@ -22,6 +29,14 @@ const Datatable = ({columns}) => {
       setList(list.filter((item) => item._id !== id));
     } catch (err) {}
   };
+  const handleClick = async (id) => {
+    try {
+      await axios.put(`/{id}`);
+      setList(list.filter((item) => item._id !== id));
+    } catch (err) {}
+  };
+  const handleShow = () => setShow(true);
+  const handleClose = () => setShow(false);
 
   const actionColumn = [
     {
@@ -30,16 +45,16 @@ const Datatable = ({columns}) => {
       width: 200,
       renderCell: (params) => {
         return (
+          
+          
           <div className="cellAction">
-            <Link to="/users/test" style={{ textDecoration: "none" }}>
-              <div className="viewButton">View</div>
-            </Link>
+  
             <div
               className="deleteButton"
               onClick={() => handleDelete(params.row._id)}
             >
-              Delete
-            </div>
+              Supprimer
+            </div>          
           </div>
         );
       },
@@ -50,7 +65,7 @@ const Datatable = ({columns}) => {
       <div className="datatableTitle">
         {path}
         <Link to={`/${path}/new`} className="link">
-          Add New
+         Ajouter
         </Link>
       </div>
       <DataGrid
@@ -61,7 +76,9 @@ const Datatable = ({columns}) => {
         rowsPerPageOptions={[9]}
         checkboxSelection
         getRowId={(row) => row._id}
+  
       />
+      
     </div>
   );
 };

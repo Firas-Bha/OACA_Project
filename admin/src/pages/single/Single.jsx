@@ -5,8 +5,13 @@ import Chart from "../../components/chart/Chart";
 import React from 'react'
 import ReactDOM from 'react-dom'
 import List from "../../components/table/Table";
+import { Card, CardActions, CardContent, CardMedia, Button, Typography } from '@material-ui/core/';
+import { useEffect, useState } from "react";
+import { DataGrid } from "@mui/x-data-grid";
 
 const Single = () => {
+  const [list, setList] = useState('');
+  const user = JSON.parse(localStorage.getItem('profile'));
   return (
     <div className="single">
       <Sidebar />
@@ -15,7 +20,7 @@ const Single = () => {
         <div className="top">
           <div className="left">
             <div className="editButton">Edit</div>
-            <h1 className="title">Information</h1>
+            <h1 className="title" >Information</h1>
             <div className="item">
               <img
                 src="https://images.pexels.com/photos/733872/pexels-photo-733872.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260"
@@ -23,7 +28,9 @@ const Single = () => {
                 className="itemImg"
               />
               <div className="details">
-                <h1 className="itemTitle">Jane Doe</h1>
+                
+    
+
                 <div className="detailItem">
                   <span className="itemKey">Email:</span>
                   <span className="itemValue">janedoe@gmail.com</span>
@@ -50,7 +57,7 @@ const Single = () => {
           </div>
         </div>
         <div className="bottom">
-        <h1 className="title">Last Transactions</h1>
+        <h2 className="title" text-align="center"  >Les dérnières Reclamations</h2>
           <List/>
         </div>
       </div>

@@ -3,19 +3,19 @@ export const userInputs = [
     id: "username",
     label: "Username",
     type: "text",
-    placeholder: "john_doe",
+    placeholder: "OACA",
   },
   {
     id: "email",
     label: "Email",
     type: "email",
-    placeholder: "john_doe@gmail.com",
+    placeholder: "OACA@gmail.com",
   },
   {
     id: "phone",
     label: "Phone",
     type: "text",
-    placeholder: "+1 234 567 89",
+    placeholder: "+216 123 456 78",
   },
   {
     id: "password",
@@ -26,14 +26,16 @@ export const userInputs = [
     id: "country",
     label: "Country",
     type: "text",
-    placeholder: "USA",
+    placeholder: "Tunisie",
   },
   {
     id: "city",
     label: "City",
     type: "text",
-    placeholder: "USA",
+    placeholder: "Ariana",
   },
+
+    
 ];
 
 export const productInputs = [
@@ -122,7 +124,7 @@ export const hotelInputs = [
 
 export const roomInputs = [
   {
-    id: "title",
+    id: "titleroom",
     label: "Title",
     type: "text",
     placeholder: "2 bed room",
@@ -145,4 +147,21 @@ export const roomInputs = [
     type: "number",
     placeholder: "2",
   },
+];
+
+export const reclamationInputs = [
+  {
+    id: "title",
+    label: "Title",
+    type: "text",
+    placeholder: "Veuillez saisir le titre",
+  },
+
+  {
+    id: "message",
+    label: "description",
+    type: "text",
+    placeholder: "Veuillez saisir une description",
+  },
+
 ];
